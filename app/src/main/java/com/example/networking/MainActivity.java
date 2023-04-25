@@ -2,8 +2,11 @@ package com.example.networking;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -36,5 +39,12 @@ public class MainActivity extends AppCompatActivity implements JsonTask.JsonTask
         for (Mountain m : listOfMountains) {
             Log.d("mountain", m.toString());
         }
+
+        RecyclerView recyclerView = findViewById(R.id.mountainRecyclerView);
+
+        RecyclerViewAdapter adapter = new RecyclerViewAdapter(this, listOfMountains);
+
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 }
