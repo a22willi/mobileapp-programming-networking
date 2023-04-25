@@ -31,7 +31,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
-        holder.name.setText(mountains.get(position).getName());
+        holder.mountainName.setText(mountains.get(position).getName());
     }
 
     @Override
@@ -41,10 +41,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     public static class MyViewHolder extends RecyclerView.ViewHolder {
 
-        TextView name;
+        TextView mountainName;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
+
+            mountainName = itemView.findViewById(R.id.textView);
         }
     }
 }
