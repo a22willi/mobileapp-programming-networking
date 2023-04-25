@@ -19,16 +19,15 @@ public class Mountain {
 
     @Override
     public String toString() {
-        return "Mountain{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", company='" + company + '\'' +
-                ", location='" + location + '\'' +
-                ", category='" + category + '\'' +
-                ", size=" + size +
-                ", cost=" + cost +
-                '}';
+        return (name +
+                " is a mountain located in " +
+                location +
+                ", It belongs to the category: " +
+                category +
+                "\n\nThe mountain is of the type: " +
+                type +
+                "\n\n\nAdditional data " +
+                auxdata.toString());
     }
 
     public String getId() {
