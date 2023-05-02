@@ -1,42 +1,43 @@
 
 # Rapport
 
-**Skriv din rapport här!**
+**Assignment 5: Networking**
 
-_Du kan ta bort all text som finns sedan tidigare_.
+Först skapades en RecyclerView. Denna kommer sedan att hålla all JSON-data som ska läsas in.
+För att smidigt läsa in JSON-data skapades en klass ämnad att hålla denna informationen kallad
+Mountain.java. För att följa de namnkonventioner fastställda inom JAVA användes @SerializedName.
 
-## Följande grundsyn gäller dugga-svar:
+Därefter skapades en RecyclerViewAdapter. Denna har som uppgift att tillhandahålla all funktionalitet
+som erbjuds av RecyvlerView. Bland annat vilken data som ska visas samt hur många element som kan visas samtidigt osv.
 
-- Ett kortfattat svar är att föredra. Svar som är längre än en sida text (skärmdumpar och programkod exkluderat) är onödigt långt.
-- Svaret skall ha minst en snutt programkod.
-- Svaret skall inkludera en kort övergripande förklarande text som redogör för vad respektive snutt programkod gör eller som svarar på annan teorifråga.
-- Svaret skall ha minst en skärmdump. Skärmdumpar skall illustrera exekvering av relevant programkod. Eventuell text i skärmdumpar måste vara läsbar.
-- I de fall detta efterfrågas, dela upp delar av ditt svar i för- och nackdelar. Dina för- respektive nackdelar skall vara i form av punktlistor med kortare stycken (3-4 meningar).
+För att skapa en design som gäller för varje element i Recyclerview skapades en Mountain_item.xml.
+med en Constraintlayout samt en cardview. 
 
-Programkod ska se ut som exemplet nedan. Koden måste vara korrekt indenterad då den blir lättare att läsa vilket gör det lättare att hitta syntaktiska fel.
-
+För att varje textView ska tillhandahållas rätt data länkades varje Textview i Mountain_Item.xml med sin motpart i Recyclerviewadapter på följande sätt.
 ```
-function errorCallback(error) {
-    switch(error.code) {
-        case error.PERMISSION_DENIED:
-            // Geolocation API stöds inte, gör något
-            break;
-        case error.POSITION_UNAVAILABLE:
-            // Misslyckat positionsanrop, gör något
-            break;
-        case error.UNKNOWN_ERROR:
-            // Okänt fel, gör något
-            break;
+public static class MyViewHolder extends RecyclerView.ViewHolder {
+    TextView mountainName;
+    TextView mountainHeight;
+    TextView mountainDescription;
+    public MyViewHolder(@NonNull View itemView) {
+        super(itemView);
+
+        mountainName = itemView.findViewById(R.id.textViewName);
+        mountainHeight = itemView.findViewById(R.id.textViewHeight);
+        mountainDescription = itemView.findViewById(R.id.textViewDesc);
     }
 }
 ```
+samt med följande kod för att specifiera vilken position/vilket element i Recyclerview vi vill använda.
+```
+public void onBindViewHolder(@NonNull RecyclerViewAdapter.MyViewHolder holder, int position) {
+    holder.mountainName.setText(mountains.get(position).getName());
+    holder.mountainHeight.setText(mountains.get(position).getSize() + "m");
+    System.out.println(mountains.get(position).toString());
+    holder.mountainDescription.setText(mountains.get(position).toString());
+}
+```
+Till sist byttes JSON_FILE ut mot JSON_URL för att hämta data från Famouspeaks.json.
 
-Bilder läggs i samma mapp som markdown-filen.
-
-![](android.png)
-
-Läs gärna:
-
-- Boulos, M.N.K., Warren, J., Gong, J. & Yue, P. (2010) Web GIS in practice VIII: HTML5 and the canvas element for interactive online mapping. International journal of health geographics 9, 14. Shin, Y. &
-- Wunsche, B.C. (2013) A smartphone-based golf simulation exercise game for supporting arthritis patients. 2013 28th International Conference of Image and Vision Computing New Zealand (IVCNZ), IEEE, pp. 459–464.
-- Wohlin, C., Runeson, P., Höst, M., Ohlsson, M.C., Regnell, B., Wesslén, A. (2012) Experimentation in Software Engineering, Berlin, Heidelberg: Springer Berlin Heidelberg.
+Resultatet av allt blev följande:
+![](RecyclerView.png)
